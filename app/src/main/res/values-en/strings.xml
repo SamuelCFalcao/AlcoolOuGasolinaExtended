@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Ethanol or Gas</string>
+
+    <!-- Calculadora Screen -->
+    <string name="titulo_calculadora">Ethanol or Gas?</string>
+    <string name="preco_alcool">Ethanol Price ($)</string>
+    <string name="preco_gasolina">Gas Price ($)</string>
+    <string name="percentual_calculo">Calculation Percentage</string>
+    <string name="percentual_70">70% (standard)</string>
+    <string name="percentual_75">75% (more economical)</string>
+    <string name="calcular">CALCULATE</string>
+    <string name="recomendacao">Recommendation:</string>
+    <string name="use_alcool">⛽ Use Ethanol!</string>
+    <string name="use_gasolina">⛽ Use Gas!</string>
+    <string name="valores_invalidos">⚠️ Invalid values</string>
+    <string name="lista_postos">Gas Stations List</string>
+
+    <!-- Lista Postos Screen -->
+    <string name="voltar">Back</string>
+    <string name="adicionar_posto">Add Station</string>
+    <string name="nenhum_posto">No stations registered.\nTap + to add.</string>
+    <string name="alcool">Ethanol</string>
+    <string name="gasolina">Gas</string>
+    <string name="excluir">Delete</string>
+    <string name="confirmar_exclusao">Confirm Deletion</string>
+    <string name="msg_confirmar_exclusao">Do you really want to delete station %1$s?</string>
+    <string name="cancelar">Cancel</string>
+
+    <!-- Detalhes Posto Screen -->
+    <string name="novo_posto">New Station</string>
+    <string name="editar_posto">Edit Station</string>
+    <string name="nome_posto">Station Name</string>
+    <string name="localizacao">Location</string>
+    <string name="lat_lng">Lat: %.6f, Lng: %.6f</string>
+    <string name="ver_no_mapa">View on Map</string>
+    <string name="obter_localizacao">Get My Location</string>
+    <string name="localizacao_nao_definida">Location not set</string>
+    <string name="permissao_negada">Location permission denied. Enable it in settings.</string>
+    <string name="salvar">SAVE</string>
+</resources>

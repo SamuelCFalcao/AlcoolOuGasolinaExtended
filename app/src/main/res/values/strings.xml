@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Álcool ou Gasolina</string>
+
+    <!-- Calculadora Screen -->
+    <string name="titulo_calculadora">Álcool ou Gasolina?</string>
+    <string name="preco_alcool">Preço do Álcool (R$)</string>
+    <string name="preco_gasolina">Preço da Gasolina (R$)</string>
+    <string name="percentual_calculo">Percentual de Cálculo</string>
+    <string name="percentual_70">70% (padrão)</string>
+    <string name="percentual_75">75% (mais econômico)</string>
+    <string name="calcular">CALCULAR</string>
+    <string name="recomendacao">Recomendação:</string>
+    <string name="use_alcool">⛽ Use Álcool!</string>
+    <string name="use_gasolina">⛽ Use Gasolina!</string>
+    <string name="valores_invalidos">⚠️ Valores inválidos</string>
+    <string name="lista_postos">Lista de Postos</string>
+
+    <!-- Lista Postos Screen -->
+    <string name="voltar">Voltar</string>
+    <string name="adicionar_posto">Adicionar Posto</string>
+    <string name="nenhum_posto">Nenhum posto cadastrado.\nToque em + para adicionar.</string>
+    <string name="alcool">Álcool</string>
+    <string name="gasolina">Gasolina</string>
+    <string name="excluir">Excluir</string>
+    <string name="confirmar_exclusao">Confirmar Exclusão</string>
+    <string name="msg_confirmar_exclusao">Deseja realmente excluir o posto %1$s?</string>
+    <string name="cancelar">Cancelar</string>
+
+    <!-- Detalhes Posto Screen -->
+    <string name="novo_posto">Novo Posto</string>
+    <string name="editar_posto">Editar Posto</string>
+    <string name="nome_posto">Nome do Posto</string>
+    <string name="localizacao">Localização</string>
+    <string name="lat_lng">Lat: %.6f, Lng: %.6f</string>
+    <string name="ver_no_mapa">Ver no Mapa</string>
+    <string name="obter_localizacao">Obter Minha Localização</string>
+    <string name="localizacao_nao_definida">Localização não definida</string>
+    <string name="permissao_negada">Permissão de localização negada. Ative nas configurações.</string>
+    <string name="salvar">SALVAR</string>
+</resources>
