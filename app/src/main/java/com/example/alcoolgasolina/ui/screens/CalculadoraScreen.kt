@@ -1,9 +1,10 @@
+// ui/screens/CalculadoraScreen.kt
 package com.example.alcoolgasolina.ui.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -27,6 +28,7 @@ fun CalculadoraScreen(
     var precoGasolina by remember { mutableStateOf("") }
     var usar75Porcento by remember { mutableStateOf(repository.carregarPercentualSwitch()) }
 
+    // Salva automaticamente quando o switch muda
     LaunchedEffect(usar75Porcento) {
         repository.salvarPercentualSwitch(usar75Porcento)
     }
@@ -37,7 +39,7 @@ fun CalculadoraScreen(
                 title = { Text(stringResource(R.string.app_name)) },
                 actions = {
                     IconButton(onClick = onNavigateToLista) {
-                        Icon(Icons.Default.List, contentDescription = stringResource(R.string.lista_postos))
+                        Icon(Icons.AutoMirrored.Filled.List, contentDescription = stringResource(R.string.lista_postos))
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -100,6 +102,7 @@ fun CalculadoraScreen(
                 }
             }
 
+            // Switch para escolher percentual
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
@@ -151,6 +154,7 @@ fun CalculadoraScreen(
                 )
             }
 
+            // Resultado
             val resultado = calcularMelhorOpcao(
                 precoAlcool.toDoubleOrNull(),
                 precoGasolina.toDoubleOrNull(),
