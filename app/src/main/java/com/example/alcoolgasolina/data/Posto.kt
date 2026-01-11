@@ -1,14 +1,13 @@
 package com.example.alcoolgasolina.data
 
-import kotlinx.serialization.Serializable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-@Serializable
+@Entity(tableName = "postos")
 data class Posto(
-    val id: String,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
     val nome: String,
     val precoAlcool: Double,
-    val precoGasolina: Double,
-    val latitude: Double,
-    val longitude: Double,
-    val dataCadastro: Long = System.currentTimeMillis()
+    val precoGasolina: Double
 )
