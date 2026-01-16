@@ -2,16 +2,17 @@ package com.example.alcoolgasolina.data
 
 import android.content.Context
 import android.content.SharedPreferences
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.decodeFromString
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import java.util.UUID
 
 class PostoRepository(context: Context) {
+    private val database = AppDatabase.getDatabase(context)
+    private val postoDao = database.postoDao()
+    
+    // Mantém SharedPreferences apenas para o switch de percentual
     private val prefs: SharedPreferences =
         context.getSharedPreferences("alcool_gasolina_prefs", Context.MODE_PRIVATE)
-
-    private val json = Json { ignoreUnknownKeys = true }
 
     fun salvarPercentualSwitch(usar75: Boolean) {
         prefs.edit().putBoolean("usar_75_porcento", usar75).apply()
@@ -21,37 +22,24 @@ class PostoRepository(context: Context) {
         return prefs.getBoolean("usar_75_porcento", false)
     }
 
-    fun salvarPosto(posto: Posto) {
-        val postos = listarPostos().toMutableList()
-        val index = postos.indexOfFirst { it.id == posto.id }
-
-        if (index >= 0) {
-            postos[index] = posto
-        } else {
-            postos.add(posto)
-        }
-
-        val postosJson = json.encodeToString(postos)
-        prefs.edit().putString("postos", postosJson).apply()
+    suspend fun salvarPosto(posto: Posto) {
+        postoDao.inserir(posto)
     }
 
-    fun listarPostos(): List<Posto> {
-        val postosJson = prefs.getString("postos", null) ?: return emptyList()
-        return try {
-            json.decodeFromString<List<Posto>>(postosJson)
-        } catch (e: Exception) {
-            emptyList()
-        }
+    fun listarPostos(): Flow<List<Posto>> {
+        return postoDao.listarTodos()
+    }
+    
+    suspend fun listarPostosSync(): List<Posto> {
+        return postoDao.listarTodos().first()
     }
 
-    fun obterPosto(id: String): Posto? {
-        return listarPostos().find { it.id == id }
+    suspend fun obterPosto(id: String): Posto? {
+        return postoDao.obterPorId(id)
     }
 
-    fun excluirPosto(id: String) {
-        val postos = listarPostos().filter { it.id != id }
-        val postosJson = json.encodeToString(postos)
-        prefs.edit().putString("postos", postosJson).apply()
+    suspend fun excluirPosto(id: String) {
+        postoDao.excluirPorId(id)
     }
 
     fun gerarNovoId(): String = UUID.randomUUID().toString()

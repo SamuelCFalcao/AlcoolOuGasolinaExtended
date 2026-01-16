@@ -1,9 +1,11 @@
 package com.example.alcoolgasolina.data
 
-import kotlinx.serialization.Serializable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-@Serializable
+@Entity(tableName = "postos")
 data class Posto(
+    @PrimaryKey
     val id: String,
     val nome: String,
     val precoAlcool: Double,

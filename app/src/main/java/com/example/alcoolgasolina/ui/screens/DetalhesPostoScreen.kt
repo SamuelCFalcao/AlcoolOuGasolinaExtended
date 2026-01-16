@@ -13,6 +13,7 @@ import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.MyLocation
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -25,6 +26,7 @@ import com.example.alcoolgasolina.R
 import com.example.alcoolgasolina.data.Posto
 import com.example.alcoolgasolina.data.PostoRepository
 import com.google.android.gms.location.LocationServices
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -34,7 +36,12 @@ fun DetalhesPostoScreen(
     onNavigateBack: () -> Unit
 ) {
     val context = LocalContext.current
-    val posto = postoId?.let { repository.obterPosto(it) }
+    val scope = rememberCoroutineScope()
+    var posto by remember { mutableStateOf<Posto?>(null) }
+    
+    LaunchedEffect(postoId) {
+        posto = postoId?.let { repository.obterPosto(it) }
+    }
 
     var nome by remember { mutableStateOf(posto?.nome ?: "") }
     var precoAlcool by remember { mutableStateOf(posto?.precoAlcool?.toString() ?: "") }
@@ -205,8 +212,10 @@ fun DetalhesPostoScreen(
                             dataCadastro = posto?.dataCadastro ?: System.currentTimeMillis()
                         )
 
-                        repository.salvarPosto(novoPosto)
-                        onNavigateBack()
+                        scope.launch {
+                            repository.salvarPosto(novoPosto)
+                            onNavigateBack()
+                        }
                     }
                 },
                 modifier = Modifier

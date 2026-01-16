@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.sp
 import com.example.alcoolgasolina.R
 import com.example.alcoolgasolina.data.Posto
 import com.example.alcoolgasolina.data.PostoRepository
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -30,12 +31,9 @@ fun ListaPostosScreen(
     onNavigateToDetalhes: (String) -> Unit,
     onNavigateToNovo: () -> Unit
 ) {
-    var postos by remember { mutableStateOf(repository.listarPostos()) }
+    val postos by repository.listarPostos().collectAsState(initial = emptyList())
     var postoParaExcluir by remember { mutableStateOf<Posto?>(null) }
-
-    LaunchedEffect(Unit) {
-        postos = repository.listarPostos()
-    }
+    val scope = rememberCoroutineScope()
 
     Scaffold(
         topBar = {
@@ -102,9 +100,10 @@ fun ListaPostosScreen(
             confirmButton = {
                 TextButton(
                     onClick = {
-                        repository.excluirPosto(posto.id)
-                        postos = repository.listarPostos()
-                        postoParaExcluir = null
+                        scope.launch {
+                            repository.excluirPosto(posto.id)
+                            postoParaExcluir = null
+                        }
                     }
                 ) {
                     Text(stringResource(R.string.excluir))
